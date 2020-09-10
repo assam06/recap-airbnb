@@ -7,4 +7,20 @@ from django.db import models
 # 3.1 여기다가 뭘 적든 장고가 form을 만들어 줄거야. 그리고 장고는 db에다가 migration이랑 같이 form에 필요한 정보를 요청할거야
 class User(AbstractUser):
 
+    """ Custom User Model """
+
+    GENDER_MALE = "male"
+    GENDER_FEMALE = "female"
+    GENDER_OTHER = "other"
+
+    GENDER_CHOICES = (
+        (GENDER_MALE, "Male"),
+        (GENDER_FEMALE, "Female"),
+        (GENDER_OTHER, "Other"),
+    )
+
+    # 사진 추가할거야 (avatar)
+    # CharField는 원래 인자1개 필요한 애야.그리고 비어있는거 허용해줌, 그리고 choices 적용 가능해
+    avatar = models.ImageField(null=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, null=True)
     bio = models.TextField(default="")
