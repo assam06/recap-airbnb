@@ -1,6 +1,10 @@
 from django.contrib import admin
-from core import models as core_models
+from . import models
+
+# Register your models here.
 
 
-class RoomAdmin(core_models.TimeStampedModel):
+@admin.register(models.Room)
+class RoomAdmin(admin.ModelAdmin):
+
     pass
