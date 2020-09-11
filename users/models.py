@@ -19,8 +19,26 @@ class User(AbstractUser):
         (GENDER_OTHER, "Other"),
     )
 
+    LANGUAGE_ENGLISH = "en"
+    LANGUAGE_KOREAN = "kr"
+
+    LANGUAGE_CHOICES = (
+        # DB로 가는 것       #Form에 나타는 글자
+        (LANGUAGE_ENGLISH, "English"),
+        (LANGUAGE_KOREAN, "Korean"),
+    )
+
+    CURRENCY_USD = "usd"
+    CURRENCY_KRW = "krw"
+
+    CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
+
     # 사진 추가할거야 (avatar)
     # CharField는 원래 인자1개 필요한 애야.그리고 비어있는거 허용해줌, 그리고 choices 적용 가능해
-    avatar = models.ImageField(null=True)
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, null=True)
-    bio = models.TextField(default="")
+    avatar = models.ImageField(blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    bio = models.TextField(default="", blank=True)
+    birthdate = models.DateField(blank=True, null=True)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
+    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
+    superhost = models.BooleanField(default=False)
