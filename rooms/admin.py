@@ -48,6 +48,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
     )
 
     list_filter = (
@@ -69,6 +70,13 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
+
+    # self는 class RoomAdmin이고 obj는 현재 row
+    def count_amenities(self, obj):
+        print(obj.amenities.all())
+        return "Potato"
+
+    count_amenities.short_description = "hello sexy!"
 
 
 @admin.register(models.Photo)
