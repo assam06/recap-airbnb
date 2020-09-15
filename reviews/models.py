@@ -12,12 +12,15 @@ class Review(core_models.TimeStampedModel):
     cleanliness = models.IntegerField()
     location = models.IntegerField()
     check_in = models.IntegerField()
-    check_out = models.IntegerField()
     value = models.IntegerField()
     # 유저를 삭제하면 모델(리뷰)도 사라져야하지
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        "users.User", related_name="reviews", on_delete=models.CASCADE
+    )
     # 그리고 리뷰는 객실이랑 연결되어 있지
-    room = models.ForeignKey("rooms.Room", on_delete=models.CASCADE)
+    room = models.ForeignKey(
+        "rooms.Room", related_name="reviews", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.review} - {self.room}"  # self.room 자체가 str을 불러서 name을 안부른것.

@@ -40,5 +40,3 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "is_superuser",
     )
-
-    list_filter = UserAdmin.list_filter + ("superhost",)

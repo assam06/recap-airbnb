@@ -14,6 +14,8 @@ class ItemAdmin(admin.ModelAdmin):
     def used_by(self, obj):
         return obj.rooms.count()
 
+    pass
+
 
 # 모델이 외부에서 보여지는 방식(리스트처럼) 과 안에서 보이는 방식을 변경해
 @admin.register(models.Room)

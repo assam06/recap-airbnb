@@ -88,9 +88,6 @@ class Room(core_models.TimeStampedModel):
     host = models.ForeignKey(
         "users.User", related_name="rooms", on_delete=models.CASCADE
     )
-
-    # 방의 타입은 roomtype중 한 종류여야해. 여러객실 유형이어선 안돼.
-    # 객실 유형은 한가지 또는 다른유형 그리고 삭제하는 경우엔 Room을 삭제해선 안돼.
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
@@ -103,9 +100,8 @@ class Room(core_models.TimeStampedModel):
     def __str__(self):
         return self.name
 
-    # room은 review 평균을 보여주는 칸이 있지!
     def total_rating(self):
-        all_reviews = self.review.all()
+        all_reviews = self.reviews.all()
         all_ratings = []
         for review in all_reviews:
             all_ratings.append(review.rating_average())
