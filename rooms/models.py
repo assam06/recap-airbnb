@@ -62,7 +62,7 @@ class Photo(core_models.TimeStampedModel):
     file = models.ImageField()
 
     # 파이썬은 파일을 상하수직방향으로 읽음. ""(string)을 하지 않으면 장고는 Room(모델)을 정의 못해.
-    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+    room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def ___str___(self):
         return self.caption
@@ -85,14 +85,18 @@ class Room(core_models.TimeStampedModel):
     check_in = models.TimeField()
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
-    host = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    host = models.ForeignKey(
+        "users.User", related_name="rooms", on_delete=models.CASCADE
+    )
 
     # 방의 타입은 roomtype중 한 종류여야해. 여러객실 유형이어선 안돼.
     # 객실 유형은 한가지 또는 다른유형 그리고 삭제하는 경우엔 Room을 삭제해선 안돼.
-    room_type = models.ForeignKey("RoomType", on_delete=models.SET_NULL, null=True)
-    amenities = models.ManyToManyField("Amenity", blank=True)
-    facilities = models.ManyToManyField("Facility", blank=True)
-    house_rules = models.ManyToManyField("HouseRule", blank=True)
+    room_type = models.ForeignKey(
+        "RoomType", related_name="room_type", on_delete=models.SET_NULL, null=True
+    )
+    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
+    facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
+    house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
     # 이걸 써줘야 등록한 이름이 나옴....흠
     # 생성된 obj or model을 지칭하는 것을 뭘로 설정할거야? 의 의미

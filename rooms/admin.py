@@ -73,8 +73,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     # self는 class RoomAdmin이고 obj는 현재 row
     def count_amenities(self, obj):
-        print(obj.amenities.all())
-        return "Potato"
+        return obj.amenities.count()
 
     count_amenities.short_description = "hello sexy!"
 
