@@ -102,3 +102,11 @@ class Room(core_models.TimeStampedModel):
     # 생성된 obj or model을 지칭하는 것을 뭘로 설정할거야? 의 의미
     def __str__(self):
         return self.name
+
+    # room은 review 평균을 보여주는 칸이 있지!
+    def total_rating(self):
+        all_reviews = self.review.all()
+        all_ratings = []
+        for review in all_reviews:
+            all_ratings.append(review.rating_average())
+        return 0

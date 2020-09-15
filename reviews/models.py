@@ -24,3 +24,17 @@ class Review(core_models.TimeStampedModel):
         # room이라고 써도 장고는 foreignKey를 보고 접근을 허용할거야.
         # self.room.country라고 하면 그대로 출력.
         # 이게 다 foreign key를 정의해서 그럼.
+
+    def rating_average(self):
+        avg = (
+            self.accuracy
+            + self.communication
+            + self.cleanliness
+            + self.location
+            + self.check_in
+            + self.value
+        ) / 6
+        return round(avg, 2)
+
+    # 줄임말로 작성
+    rating_average.short_description = "Avg."
