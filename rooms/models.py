@@ -64,7 +64,7 @@ class Photo(core_models.TimeStampedModel):
     # 파이썬은 파일을 상하수직방향으로 읽음. ""(string)을 하지 않으면 장고는 Room(모델)을 정의 못해.
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
-    def ___str___(self):
+    def __str__(self):
         return self.caption
 
 
@@ -92,7 +92,7 @@ class Room(core_models.TimeStampedModel):
     # 방의 타입은 roomtype중 한 종류여야해. 여러객실 유형이어선 안돼.
     # 객실 유형은 한가지 또는 다른유형 그리고 삭제하는 경우엔 Room을 삭제해선 안돼.
     room_type = models.ForeignKey(
-        "RoomType", related_name="room_type", on_delete=models.SET_NULL, null=True
+        "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
