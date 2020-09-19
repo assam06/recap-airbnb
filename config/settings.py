@@ -138,3 +138,5 @@ AUTH_USER_MODEL = "users.User"
 
 # media root가 절대 경로가 될거라고 장고에게 말해줘야 함
 MEDIA_ROOT = BASE_DIR / "uploads"
+
+MEDIA_URL = "/media/"
