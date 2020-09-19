@@ -59,7 +59,7 @@ class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to="room_photos")
 
     # 파이썬은 파일을 상하수직방향으로 읽음. ""(string)을 하지 않으면 장고는 Room(모델)을 정의 못해.
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)

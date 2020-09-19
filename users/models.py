@@ -35,7 +35,7 @@ class User(AbstractUser):
 
     # 사진 추가할거야 (avatar)
     # CharField는 원래 인자1개 필요한 애야.그리고 비어있는거 허용해줌, 그리고 choices 적용 가능해
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)
     birthdate = models.DateField(blank=True, null=True)
