@@ -18,11 +18,18 @@ class ItemAdmin(admin.ModelAdmin):
     pass
 
 
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
+
+
 # 모델이 외부에서 보여지는 방식(리스트처럼) 과 안에서 보이는 방식을 변경해
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
+
+    inlines = (PhotoInline,)
 
     fieldsets = (
         ("Basic Info", {"fields": ("name", "description", "country", "city", "price")}),
@@ -69,6 +76,8 @@ class RoomAdmin(admin.ModelAdmin):
         "city",
         "country",
     )
+
+    raw_id_fields = ("host",)
 
     search_fields = ("=city", "^host__username")
 
