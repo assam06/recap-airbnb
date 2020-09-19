@@ -87,6 +87,7 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
+
     # self는 class RoomAdmin이고 obj는 현재 row
     def count_amenities(self, obj):
         return obj.amenities.count()
